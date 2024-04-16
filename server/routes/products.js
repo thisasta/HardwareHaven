@@ -1,6 +1,5 @@
 import express from "express";
-import {getProducts} from "../server.js";
-
+import {getProducts, getProduct, createProduct} from "../server.js";
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -8,4 +7,16 @@ router.get('/', async (req, res) => {
     res.send(products)
 });
 
-module.exports = router;
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const product = await getProduct(id);
+    res.send(product)
+});
+
+router.post('/new', async (req, res) => {
+    const {name, description, quantity} = req.body;
+    const product = await createProduct(name, description, quantity);
+    res.status(201).send(product);
+});
+
+export default router;
