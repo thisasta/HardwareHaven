@@ -1,5 +1,5 @@
 import express from "express";
-import {getProducts, getProduct, createProduct} from "../server.js";
+import {getProducts, getProduct, createProduct, search} from "../server.js";
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -18,5 +18,10 @@ router.post('/new', async (req, res) => {
     const product = await createProduct(name, description, quantity);
     res.status(201).send(product);
 });
+
+router.get('/search/:name', async (req, res) => {
+    const name = req.params.name;
+    res.send(await search(name));
+})
 
 export default router;

@@ -20,10 +20,14 @@ export async function getProduct(id) {
     return result;
 }
 
-export async function createProduct(name, description, startingQuantity) {
-    const [result] = await pool.query(`INSERT INTO products (name, description, quantity) VALUES (?, ?, ?)`, [name, description, startingQuantity]);
+export async function createProduct(name, description, startingQuantity, productGroupID) {
+    const [result] = await pool.query(`INSERT INTO products (name, description, quantity, productGroupID) VALUES (?, ?, ?, ?)`, [name, description, startingQuantity, productGroupID]);
     const id = result.insertId;
     return getProduct(id);
+}
+
+export async function search(name) {
+    const [result] = await pool.query(`SELECT * FROM products WHERE name LIKE ?` [`%${name}%`]);
 }
 
 // const products = await getProducts();
