@@ -20,6 +20,11 @@ export async function getProduct(id) {
     return result;
 }
 
+export async function getTop() {
+        const [result] = await pool.query(`SELECT * FROM products ORDER BY sold DESC LIMIT 3`);
+        return result;
+}
+
 export async function createProduct(name, description, startingQuantity, productGroupID) {
     const [result] = await pool.query(`INSERT INTO products (name, description, quantity, productGroupID) VALUES (?, ?, ?, ?)`, [name, description, startingQuantity, productGroupID]);
     const id = result.insertId;
