@@ -7,7 +7,8 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { CardContent, Card } from "@/components/ui/card"
 import pc from "../../public/pc.png"
-import Image from "next/image";
+import Image from "next/image"
+import FetchTop from "../components/fetchTop"
 
 export default function page() {
     return (
@@ -56,57 +57,24 @@ export default function page() {
                         </div>
                     </div>
                     <div className="mx-auto grid max-w-sm items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
-                        <Card>
-                            <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                                <img
-                                    alt="Product 1"
-                                    className="aspect-square overflow-hidden rounded-xl object-cover"
-                                    height="150"
-                                    src="/placeholder.svg"
-                                    width="150"
-                                />
-                                <div className="space-y-1 text-center">
-                                    <h3 className="text-lg font-bold">NVIDIA RTX 3080</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">High-performance GPU</p>
-                                    <div className="flex items-center justify-center gap-1 text-lg font-bold">$799</div>
-                                </div>
-                                <Button size="sm">Add to Cart</Button>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                                <img
-                                    alt="Product 2"
-                                    className="aspect-square overflow-hidden rounded-xl object-cover"
-                                    height="150"
-                                    src="/placeholder.svg"
-                                    width="150"
-                                />
-                                <div className="space-y-1 text-center">
-                                    <h3 className="text-lg font-bold">Intel Core i9-12900K</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">High-performance CPU</p>
-                                    <div className="flex items-center justify-center gap-1 text-lg font-bold">$599</div>
-                                </div>
-                                <Button size="sm">Add to Cart</Button>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
-                                <img
-                                    alt="Product 3"
-                                    className="aspect-square overflow-hidden rounded-xl object-cover"
-                                    height="150"
-                                    src="/placeholder.svg"
-                                    width="150"
-                                />
-                                <div className="space-y-1 text-center">
-                                    <h3 className="text-lg font-bold">Corsair Vengeance RGB Pro</h3>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">High-performance RAM</p>
-                                    <div className="flex items-center justify-center gap-1 text-lg font-bold">$149</div>
-                                </div>
-                                <Button size="sm">Add to Cart</Button>
-                            </CardContent>
-                        </Card>
+                        <FetchTop />
+                        {/*<Card>*/}
+                        {/*    <CardContent className="flex flex-col items-center justify-center gap-4 p-6">*/}
+                        {/*        <img*/}
+                        {/*            alt="Product 1"*/}
+                        {/*            className="aspect-square overflow-hidden rounded-xl object-cover"*/}
+                        {/*            height="150"*/}
+                        {/*            src="/placeholder.svg"*/}
+                        {/*            width="150"*/}
+                        {/*        />*/}
+                        {/*        <div className="space-y-1 text-center">*/}
+                        {/*            <h3 className="text-lg font-bold">NVIDIA RTX 3080</h3>*/}
+                        {/*            <p className="text-sm text-gray-500 dark:text-gray-400">High-performance GPU</p>*/}
+                        {/*            <div className="flex items-center justify-center gap-1 text-lg font-bold">$799</div>*/}
+                        {/*        </div>*/}
+                        {/*        <Button size="sm">Add to Cart</Button>*/}
+                        {/*    </CardContent>*/}
+                        {/*</Card>*/}
                     </div>
                 </div>
             </section>
@@ -143,6 +111,9 @@ export default function page() {
                     </div>
                 </div>
             </section>
+            <div>
+
+            </div>
         </main>
         </>
     )
