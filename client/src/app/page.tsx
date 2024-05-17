@@ -57,24 +57,23 @@ export default function page() {
                         </div>
                     </div>
                     <div className="mx-auto grid max-w-sm items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
-                        <FetchTop />
-                        {/*<Card>*/}
-                        {/*    <CardContent className="flex flex-col items-center justify-center gap-4 p-6">*/}
-                        {/*        <img*/}
-                        {/*            alt="Product 1"*/}
-                        {/*            className="aspect-square overflow-hidden rounded-xl object-cover"*/}
-                        {/*            height="150"*/}
-                        {/*            src="/placeholder.svg"*/}
-                        {/*            width="150"*/}
-                        {/*        />*/}
-                        {/*        <div className="space-y-1 text-center">*/}
-                        {/*            <h3 className="text-lg font-bold">NVIDIA RTX 3080</h3>*/}
-                        {/*            <p className="text-sm text-gray-500 dark:text-gray-400">High-performance GPU</p>*/}
-                        {/*            <div className="flex items-center justify-center gap-1 text-lg font-bold">$799</div>*/}
-                        {/*        </div>*/}
-                        {/*        <Button size="sm">Add to Cart</Button>*/}
-                        {/*    </CardContent>*/}
-                        {/*</Card>*/}
+                        <Card>
+                            <CardContent className="flex flex-col items-center justify-center gap-4 p-6">
+                                <img
+                                    alt="Product 1"
+                                    className="aspect-square overflow-hidden rounded-xl object-cover"
+                                    height="150"
+                                    src="/placeholder.svg"
+                                    width="150"
+                                />
+                                <div className="space-y-1 text-center">
+                                    <h3 className="text-lg font-bold">NVIDIA RTX 3080</h3>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">High-performance GPU</p>
+                                    <div className="flex items-center justify-center gap-1 text-lg font-bold">$799</div>
+                                </div>
+                                <Button size="sm">Add to Cart</Button>
+                            </CardContent>
+                        </Card>
                     </div>
                 </div>
             </section>

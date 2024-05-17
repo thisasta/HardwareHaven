@@ -1,5 +1,6 @@
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
+import bcrypt from "bcrypt";
 
 dotenv.config()
 
@@ -34,6 +35,28 @@ export async function createProduct(name, description, startingQuantity, product
 export async function search(name) {
     const [result] = await pool.query(`SELECT * FROM products WHERE name LIKE ?` [`%${name}%`]);
 }
+
+const bcrypt = require('bcrypt');
+
+export async function newUser(firstName, lastName, email, password) {
+    try {
+        const saltRounds = 10;
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const [result] = await pool.query(
+            'INSERT INTO users (firstname, lastname, email, password_hash) VALUES (?, ?, ?, ?)',
+            [firstName, lastName, email, hashedPassword]
+        );
+
+        console.log('User created successfully');
+        return result; // or any other value you want to return
+    } catch (error) {
+        console.error('Error creating user:', error);
+        throw error; // or handle the error appropriately
+    }
+}
+
 
 // const products = await getProducts();
 // console.log(products);
