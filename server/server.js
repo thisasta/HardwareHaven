@@ -17,44 +17,29 @@ export async function getProducts() {
 }
 
 export async function getProduct(id) {
-    const [result] = await pool.query(`SELECT * FROM products WHERE id = ?`, [id]);
+    const [result] = await pool.query(`SELECT * FROM products WHERE product_id = ?`, [id]);
     return result;
 }
 
 export async function getTop() {
-        const [result] = await pool.query(`SELECT * FROM products ORDER BY sold DESC LIMIT 3`);
+        const [result] = await pool.query(`SELECT p.product_id, p.product_name, SUM(od.quantity) AS total_quantity FROM OrderDetails od JOIN Products p ON od.product_id = p.product_id GROUP BY p.product_id, p.product_name ORDER BY total_quantity DESC LIMIT 3;`);
         return result;
 }
 
-export async function createProduct(name, description, startingQuantity, productGroupID) {
-    const [result] = await pool.query(`INSERT INTO products (name, description, quantity, productGroupID) VALUES (?, ?, ?, ?)`, [name, description, startingQuantity, productGroupID]);
+export async function createProduct(name, description, startingQuantity, productGroupID, image_url, price) {
+    const [result] = await pool.query(`INSERT INTO products (product_name, description, stock, group_id, image_url, price) VALUES (?, ?, ?, ?)`, [name, description, startingQuantity, productGroupID, image_url, price]);
     const id = result.insertId;
     return getProduct(id);
 }
 
 export async function search(name) {
-    const [result] = await pool.query(`SELECT * FROM products WHERE name LIKE ?` [`%${name}%`]);
+    const [result] = await pool.query(`SELECT * FROM products WHERE product_name LIKE ?`, [`%${name}%`]);
+    return result;
 }
 
-const bcrypt = require('bcrypt');
-
-export async function newUser(firstName, lastName, email, password) {
-    try {
-        const saltRounds = 10;
-        const salt = await bcrypt.genSalt(saltRounds);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const [result] = await pool.query(
-            'INSERT INTO users (firstname, lastname, email, password_hash) VALUES (?, ?, ?, ?)',
-            [firstName, lastName, email, hashedPassword]
-        );
-
-        console.log('User created successfully');
-        return result; // or any other value you want to return
-    } catch (error) {
-        console.error('Error creating user:', error);
-        throw error; // or handle the error appropriately
-    }
+export async function newUser(first_name, last_name, username, email, password) {
+    const [result] = await pool.query(`INSERT INTO users (first_name, last_name, username, email, password_hash) VALUES (?, ?, ?, ?, ?)`, [first_name, last_name, username, email, password]);
+    return await pool.query(`SELECT * FROM users WHERE email LIKE ?`, [`${email}`]);
 }
 
 
