@@ -2,17 +2,6 @@ import express from "express";
 import {getProducts, getProduct, createProduct, search, getTop} from "../server.js";
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const products = await getProducts();
-    res.send(products)
-});
-
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const product = await getProduct(id);
-    res.send(product)
-});
-
 router.post('/new', async (req, res) => {
     const {name, description, quantity} = req.body;
     const product = await createProduct(name, description, quantity);
@@ -24,9 +13,26 @@ router.get('/search/:name', async (req, res) => {
     res.send(await search(name));
 })
 
-router.get('/top/:num', async (req, res) => {
-    const result = await getTop();
-    res.send(result);
-})
+router.get('/top', async (req, res) => {
+    try {
+        const result = await getTop();
+        res.send(result);
+    } catch (error) {
+        console.error('Error fetching top products:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const product = await getProduct(id);
+    res.send(product)
+});
+
+router.get('/', async (req, res) => {
+    const products = await getProducts();
+    res.send(products)
+});
+
 
 export default router;

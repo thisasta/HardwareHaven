@@ -46,11 +46,13 @@ CREATE TABLE Products
     description  TEXT,
     price        DECIMAL(10, 2) NOT NULL,
     stock        INT            NOT NULL,
+    sold         INT            NOT NULL DEFAULT 0,
     group_id     INT,
     image_url    VARCHAR(255),
     created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (group_id) REFERENCES ProductGroups (group_id)
 );
+
 
 -- Create Orders table
 CREATE TABLE Orders
@@ -112,36 +114,37 @@ VALUES ('CPUs', 'Central Processing Units'),
        ('Cooling', 'Cooling Solutions for PCs');
 
 -- Insert products with image URLs
-INSERT INTO Products (product_name, description, price, stock, group_id, image_url)
+INSERT INTO Products (product_name, description, price, stock, group_id, image_url, sold)
 VALUES ('Intel Core i9-11900K', '8-Core, 16-Thread, 3.5 GHz (5.3 GHz Turbo) CPU', 499.99, 50, 1,
-        'https://example.com/images/intel_core_i9_11900k.jpg'),
+        'https://example.com/images/intel_core_i9_11900k.jpg', 5),
        ('AMD Ryzen 9 5900X', '12-Core, 24-Thread, 3.7 GHz (4.8 GHz Turbo) CPU', 549.99, 45, 1,
-        'https://example.com/images/amd_ryzen_9_5900x.jpg'),
+        'https://example.com/images/amd_ryzen_9_5900x.jpg', 10),
        ('NVIDIA GeForce RTX 3080', '10GB GDDR6X, PCIe 4.0 Graphics Card', 699.99, 30, 2,
-        'https://example.com/images/nvidia_geforce_rtx_3080.jpg'),
+        'https://example.com/images/nvidia_geforce_rtx_3080.jpg', 8),
        ('AMD Radeon RX 6800 XT', '16GB GDDR6, PCIe 4.0 Graphics Card', 649.99, 35, 2,
-        'https://example.com/images/amd_radeon_rx_6800_xt.jpg'),
+        'https://example.com/images/amd_radeon_rx_6800_xt.jpg', 7),
        ('ASUS ROG Strix Z590-E', 'ATX, LGA 1200, DDR4 Motherboard', 349.99, 25, 3,
-        'https://example.com/images/asus_rog_strix_z590_e.jpg'),
+        'https://example.com/images/asus_rog_strix_z590_e.jpg', 12),
        ('MSI MPG B550 Gaming Edge', 'ATX, AM4, DDR4 Motherboard', 179.99, 40, 3,
-        'https://example.com/images/msi_mpg_b550_gaming_edge.jpg'),
+        'https://example.com/images/msi_mpg_b550_gaming_edge.jpg', 9),
        ('Corsair Vengeance LPX 16GB', '2x8GB, DDR4, 3200MHz RAM', 89.99, 100, 4,
-        'https://example.com/images/corsair_vengeance_lpx_16gb.jpg'),
+        'https://example.com/images/corsair_vengeance_lpx_16gb.jpg', 20),
        ('G.Skill Trident Z RGB 32GB', '2x16GB, DDR4, 3600MHz RAM', 199.99, 70, 4,
-        'https://example.com/images/gskill_trident_z_rgb_32gb.jpg'),
+        'https://example.com/images/gskill_trident_z_rgb_32gb.jpg', 15),
        ('Samsung 970 EVO Plus 1TB', 'M.2 NVMe SSD', 149.99, 80, 5,
-        'https://example.com/images/samsung_970_evo_plus_1tb.jpg'),
-       ('WD Black 4TB', '3.5" SATA HDD', 119.99, 60, 5, 'https://example.com/images/wd_black_4tb.jpg'),
+        'https://example.com/images/samsung_970_evo_plus_1tb.jpg', 25),
+       ('WD Black 4TB', '3.5" SATA HDD', 119.99, 60, 5, 'https://example.com/images/wd_black_4tb.jpg', 18),
        ('Corsair RM850x', '850W, 80+ Gold, Fully Modular PSU', 129.99, 55, 6,
-        'https://example.com/images/corsair_rm850x.jpg'),
+        'https://example.com/images/corsair_rm850x.jpg', 22),
        ('EVGA SuperNOVA 750 G5', '750W, 80+ Gold, Fully Modular PSU', 109.99, 65, 6,
-        'https://example.com/images/evga_supernova_750_g5.jpg'),
-       ('NZXT H510', 'Mid Tower ATX Case', 79.99, 90, 7, 'https://example.com/images/nzxt_h510.jpg'),
+        'https://example.com/images/evga_supernova_750_g5.jpg', 17),
+       ('NZXT H510', 'Mid Tower ATX Case', 79.99, 90, 7, 'https://example.com/images/nzxt_h510.jpg', 30),
        ('Fractal Design Meshify C', 'Mid Tower ATX Case', 99.99, 85, 7,
-        'https://example.com/images/fractal_design_meshify_c.jpg'),
-       ('Noctua NH-D15', 'Dual Tower CPU Cooler', 89.99, 40, 8, 'https://example.com/images/noctua_nh_d15.jpg'),
+        'https://example.com/images/fractal_design_meshify_c.jpg', 14),
+       ('Noctua NH-D15', 'Dual Tower CPU Cooler', 89.99, 40, 8, 'https://example.com/images/noctua_nh_d15.jpg', 11),
        ('Corsair iCUE H150i', '360mm Liquid CPU Cooler', 159.99, 50, 8,
-        'https://example.com/images/corsair_icue_h150i.jpg');
+        'https://example.com/images/corsair_icue_h150i.jpg', 19);
+
 
 -- Insert orders
 INSERT INTO Orders (user_id, order_date, status, total)
